@@ -99,7 +99,13 @@ Spring Boot, Spring Security, Spring Data Jpa, PostgreSQL, Thymeleaf
 
   >date_of_birth DATE,
 
-  >created_at TIMESTAMP
+  >created_at TIMESTAMP,
+
+  >username varchar(100),
+
+  >password varchar(100),
+
+  >role varchar(100),
 
   >);
 
