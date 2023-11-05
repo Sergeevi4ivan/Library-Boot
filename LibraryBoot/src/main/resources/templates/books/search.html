@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Поиск книг</title>
+</head>
+<body>
+
+<form th:method="GET" th:action="@{/books/search}" th:object="${book}">
+
+<label for="title">Введите поисковый запрос: </label>
+<input type="text" name="title" th:field="*{title}" id="title"/>
+
+<br/>
+
+  <input type="submit" value="Искать!"/>
+</form>
+
+<br/>
+<hr/>
+
+<span th:if="${books.isEmpty()}">
+    <span>Книга не найдена </span>
+
+</span>
+
+<span th:if="${books}">
+    <div th:each="book : ${books}">
+    <div>Результат поиска: </div>
+        <table th:border="1">
+            <thead>
+            <tr>
+                <th>Id</th>
+                <th>Название</th>
+                <th>Автор</th>
+                <th>Год написания</th>
+                <th>Книгу взял</th>
+            </tr>
+            </thead>
+
+            <tbody>
+            <tr th:each="book : ${books}">
+                <td th:text="${book.getBookId()}"></td>
+                <td th:text="${book.getTitle()}"></td>
+                <td th:text="${book.getAuthor()}"></td>
+                <td th:text="${book.getYearProduction()}"></td>
+                <td th:text="${book.getOwner().getName()}"></td>
+
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</span>
+
+<br/>
+<hr/>
+
+<form th:action="@{/logout}" th:method="POST">
+    <input type="submit" value="Logout" />
+
+</form>
+
+</body>
+</html>

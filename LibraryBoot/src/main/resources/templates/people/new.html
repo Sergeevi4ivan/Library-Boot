@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>New person</title>
+</head>
+<body>
+
+<form th:method="POST" th:action="@{/people}" th:object="${person}">
+
+  <label for="name">Введите ФИО: </label>
+  <input type="text" th:field="*{name}" id="name"/>
+  <div style="color:red" th:if="${#fields.hasErrors('name')}" th:errors="*{name}">name error</div>
+  <br/>
+
+  <label for="age">Введите возраст: </label>
+  <input type="text" th:field="*{age}" id="age"/>
+  <div style="color:red" th:if="${#fields.hasErrors('age')}" th:errors="*{age}">age error</div>
+  <br/>
+
+  <label for="date_of_birth">Введите дату рождения (дд/мм/гггг): </label>
+  <input type="text" th:field="*{dateOfBirth}" id="date_of_birth"/>
+  <div style="color:red" th:if="${#fields.hasErrors('dateOfBirth')}" th:errors="*{dateOfBirth}">dateOfBirth error</div>
+  <br/>
+
+  <label for="username">Введите логин: </label>
+  <input type="text" th:field="*{username}" id="username"/>
+  <div style="color: red" th:if="${#fields.hasErrors('username')}" th:errors="*{username}">Username error</div>
+  <br/>
+
+  <label for="password">Введите пароль: </label>
+  <input type="text" th:field="*{password}" id="password"/>
+  <div style="color: red" th:if="${#fields.hasErrors('password')}" th:errors="*{password}">password error</div>
+  <br/>
+
+
+  <input type="submit" value="Create!"/>
+</form>
+
+<br/>
+<hr/>
+
+<form th:action="@{/logout}" th:method="POST">
+  <input type="submit" value="Logout" />
+
+</form>
+
+</body>
+</html>
