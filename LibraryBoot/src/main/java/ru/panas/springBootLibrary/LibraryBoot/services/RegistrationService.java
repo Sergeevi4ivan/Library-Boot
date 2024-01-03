@@ -8,8 +8,6 @@ import ru.panas.springBootLibrary.LibraryBoot.models.Person;
 import ru.panas.springBootLibrary.LibraryBoot.repositories.PeopleRepository;
 
 import java.util.Date;
-import java.util.Optional;
-
 
 @Service
 public class RegistrationService {
@@ -26,13 +24,6 @@ public class RegistrationService {
     @Transactional
     public void register(Person person) {
 
-        // Если нет ни одного админа, то создаётся админ по умолчанию
-        Optional<Person> getAdmin = peopleRepository.findByRole("ROLE_ADMIN");
-
-        if (getAdmin.isEmpty()) {
-            createAdmin();
-        }
-
         // Регистрация нового пользователя
         String encodedPassword = passwordEncoder.encode(person.getPassword());
         person.setPassword(encodedPassword);
@@ -42,18 +33,4 @@ public class RegistrationService {
         peopleRepository.save(person);
     }
 
-    // Метод создаёт админа по умолчанию
-    private void createAdmin() {
-        Person personAdmin = new Person();
-        personAdmin.setName("Admin");
-        personAdmin.setAge(24);
-        personAdmin.setDateOfBirth(new Date());
-        personAdmin.setCreatedAt(new Date());
-        personAdmin.setUsername("admin");
-        personAdmin.setPassword("admin");
-        personAdmin.setRole("ROLE_ADMIN");
-
-        peopleRepository.save(personAdmin);
-
-    }
 }
